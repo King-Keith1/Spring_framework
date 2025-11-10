@@ -5,8 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import tacos.Ingredient.Type;
-import tacos.data.IngredientRepository;
+import tacos.tacos05.Ingredient.Type;
+import tacos.tacos05.data.IngredientRepository;
 
 @SpringBootApplication
 public class TacoCloudApplication {
