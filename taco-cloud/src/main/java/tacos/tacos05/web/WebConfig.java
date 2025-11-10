@@ -1,4 +1,4 @@
-package tacos.web;
+package tacos.tacos05.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
