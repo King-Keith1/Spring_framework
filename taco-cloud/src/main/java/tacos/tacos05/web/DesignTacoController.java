@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,87 +26,106 @@ import tacos.tacos05.Taco;
 import tacos.tacos05.User;
 import tacos.tacos05.data.IngredientRepository;
 import tacos.tacos05.data.TacoRepository;
+import tacos.tacos05.data.OrderRepository;
 import tacos.tacos05.data.UserRepository;
 
+@Slf4j
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("order")
-@Slf4j
 public class DesignTacoController {
 
-  private final IngredientRepository ingredientRepo;
+    private final IngredientRepository ingredientRepo;
+    private final TacoRepository tacoRepo;
+    private final OrderRepository orderRepo;
+    private final UserRepository userRepo;
 
-  private TacoRepository tacoRepo;
-
-  private UserRepository userRepo;
-
-  @Autowired
-  public DesignTacoController(
-        IngredientRepository ingredientRepo,
-        TacoRepository tacoRepo,
-        UserRepository userRepo) {
-    this.ingredientRepo = ingredientRepo;
-    this.tacoRepo = tacoRepo;
-    this.userRepo = userRepo;
-  }
-
-  @ModelAttribute
-  public void addIngredientsToModel(Model model) {
-    List<Ingredient> ingredients = new ArrayList<>();
-    ingredientRepo.findAll().forEach(i -> ingredients.add(i));
-
-    Type[] types = Ingredient.Type.values();
-    for (Type type : types) {
-      model.addAttribute(type.toString().toLowerCase(),
-          filterByType(ingredients, type));
-    }
-  }
-
-  @ModelAttribute(name = "order")
-  public TacoOrder order() {
-    return new TacoOrder();
-  }
-
-  @ModelAttribute(name = "taco")
-  public Taco taco() {
-    return new Taco();
-  }
-
-  @ModelAttribute(name = "user")
-  public User user(Principal principal) {
-	    String username = principal.getName();
-	    User user = userRepo.findByUsername(username);
-	    return user;
-  }
-
-  @GetMapping
-  public String showDesignForm() {
-    return "design";
-  }
-
-  @PostMapping
-  public String processTaco(
-      @Valid Taco taco, Errors errors,
-      @ModelAttribute TacoOrder order) {
-
-    log.info("   --- Saving taco");
-
-    if (errors.hasErrors()) {
-      return "design";
+    @Autowired
+    public DesignTacoController(
+            IngredientRepository ingredientRepo,
+            TacoRepository tacoRepo,
+            OrderRepository orderRepo,
+            UserRepository userRepo) {
+        this.ingredientRepo = ingredientRepo;
+        this.tacoRepo = tacoRepo;
+        this.orderRepo = orderRepo;
+        this.userRepo = userRepo;
     }
 
-    Taco saved = tacoRepo.save(taco);
-    order.addTaco(saved);
+    @ModelAttribute
+    public void addIngredientsToModel(Model model) {
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredientRepo.findAll().forEach(ingredients::add);
 
-    return "redirect:/orders/current";
-  }
+        for (Type type : Ingredient.Type.values()) {
+            model.addAttribute(type.toString().toLowerCase(),
+                    filterByType(ingredients, type));
+        }
+    }
 
-  private Iterable<Ingredient> filterByType(
-      List<Ingredient> ingredients, Type type) {
-    return ingredients
-              .stream()
-              .filter(x -> x.getType().equals(type))
-              .collect(Collectors.toList());
-  }
+    @ModelAttribute(name = "order")
+    public TacoOrder order() {
+        return new TacoOrder();
+    }
 
+    @ModelAttribute(name = "taco")
+    public Taco taco() {
+        return new Taco();
+    }
+
+    @ModelAttribute(name = "user")
+    public User user(Principal principal) {
+        if (principal == null) {
+            return null;
+        }
+        return userRepo.findByUsername(principal.getName());
+    }
+
+    @GetMapping
+    public String showDesignForm(Model model) {
+        if (!model.containsAttribute("taco")) {
+            model.addAttribute("taco", new Taco());
+        }
+        return "design";
+    }
+
+    @PostMapping
+    @Transactional
+    public String processTaco(
+            @Valid @ModelAttribute("taco") Taco taco,
+            Errors errors,
+            @ModelAttribute TacoOrder order,
+            @ModelAttribute User user,
+            Model model) {
+
+        if (errors.hasErrors()) {
+            log.warn("Taco design has validation errors: {}", errors);
+            return "design";
+        }
+
+        // ✅ Ensure the order belongs to the logged-in user
+        if (order.getUser() == null && user != null) {
+            order.setUser(user);
+        }
+
+        // ✅ Save or update order first (so it’s persistent)
+        TacoOrder savedOrder = orderRepo.save(order);
+
+        // ✅ Link taco to that persistent order
+        taco.setTacoOrder(savedOrder);
+
+        // ✅ Save taco and link it back
+        Taco savedTaco = tacoRepo.save(taco);
+        savedOrder.addTaco(savedTaco);
+
+        log.info("✅ Taco '{}' saved and linked to order ID {}", savedTaco.getName(), savedOrder.getId());
+
+        return "redirect:/orders/current";
+    }
+
+    private List<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
+        return ingredients.stream()
+                .filter(x -> x.getType().equals(type))
+                .collect(Collectors.toList());
+    }
 }

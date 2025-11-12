@@ -1,27 +1,31 @@
-package tacos.tacos05;
+package tacos.tacos06;
 
 import java.util.Arrays;
 import java.util.Collection;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;   // ✅ add this import
+import jakarta.persistence.Table;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-@Data
 @Entity
-@Table(name = "users")  // ✅ Fix reserved word issue
+@Table(name = "users")  // ✅ prevents SQL syntax error ("user" is a reserved keyword)
+@Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
 public class User implements UserDetails {
 
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,11 +38,10 @@ public class User implements UserDetails {
     private final String city;
     private final String state;
     private final String zip;
-    private final String phone;
+    private final String phoneNumber;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // ✅ This ensures every user automatically has ROLE_USER
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
