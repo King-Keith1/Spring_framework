@@ -1,13 +1,13 @@
-package wasd.trainer;
+package eldenmessages;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WasdTrainerApplication {
+public class EldenMessagesApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WasdTrainerApplication.class, args);
+        SpringApplication.run(EldenMessagesApplication.class, args);
     }
 
 }

@@ -1,0 +1,19 @@
+<h1>Elden Messages</h1>
+
+<form method="post" action="/send">
+    <input type="text" name="content" placeholder="Leave a message..." required />
+    <button type="submit">Send</button>
+</form>
+
+<hr>
+
+<div>
+    <h2>Messages:</h2>
+    <ul>
+        <li th:each="msg : ${messages}">
+            <strong th:text="${msg.username}"></strong>:
+            <span th:text="${msg.content}"></span>
+        </li>
+    </ul>
+</div>
+

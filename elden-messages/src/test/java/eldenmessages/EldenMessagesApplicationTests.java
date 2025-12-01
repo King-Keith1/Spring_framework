@@ -1,10 +1,10 @@
-package wasd.trainer;
+package eldenmessages;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WasdTrainerApplicationTests {
+class EldenMessagesApplicationTests {
 
     @Test
     void contextLoads() {
