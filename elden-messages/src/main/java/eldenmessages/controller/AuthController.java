@@ -1,6 +1,6 @@
 package eldenmessages.controller;
 
-import eldenmessages.model.User;
+import eldenmessages.entity.User;   // <-- FIXED IMPORT
 import eldenmessages.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

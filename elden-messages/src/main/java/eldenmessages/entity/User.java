@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "users")   // ✔ FIX — rename table so H2 is happy
 public class User {
 
     @Id
