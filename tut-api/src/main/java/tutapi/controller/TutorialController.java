@@ -1,12 +1,9 @@
 package tutapi.controller;
 
-import tutapi.model.Tutorial; // adjust package to wherever your Tutorial class is
-
+import tutapi.model.Tutorial;
+import java.util.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-// import Tutorial from wherever it is
-// import tutapi.model.Tutorial;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,6 +17,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @RequestMapping("/api/tutorials")
 public class TutorialController {
 
+    // simple in-memory "repo" for demo
+    private final Map<Long, Tutorial> store = new LinkedHashMap<>();
+
+    public TutorialController() {
+        store.put(1L, new Tutorial(1L, "Intro to Spring Boot", "Basics of Spring Boot", true));
+        store.put(2L, new Tutorial(2L, "Swagger Integration", "Documenting REST API with Swagger/OpenAPI", true));
+    }
+
     @Operation(summary = "Retrieve a Tutorial by Id", description = "Get a Tutorial object by specifying its id.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = Tutorial.class))),
@@ -27,8 +32,7 @@ public class TutorialController {
     })
     @GetMapping("/{id}")
     public ResponseEntity<Tutorial> getTutorialById(@PathVariable Long id) {
-        // Example implementation
-        Tutorial tutorial = findTutorialById(id); // your service / repository call
+        Tutorial tutorial = findTutorialById(id);
         if (tutorial == null) {
             return ResponseEntity.notFound().build();
         }
@@ -36,10 +40,8 @@ public class TutorialController {
     }
 
     private Tutorial findTutorialById(Long id) {
-        // dummy impl; replace with your real data access
-        return null;
+        return store.get(id);
     }
 
-    // other endpoints ...
+    // other endpoints (create/update/delete) can be added similarly
 }
-
