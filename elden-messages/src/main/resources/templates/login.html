@@ -1,6 +1,30 @@
-<form action="/login" method="post">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Elden Messages</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+
+<h1>Login</h1>
+
+<form th:action="@{/login}" method="post">
+
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+
     <input name="username" placeholder="Username" required>
     <input name="password" type="password" placeholder="Password" required>
+
     <button type="submit">Login</button>
+
+    <div style="color:red;" th:if="${param.error}">
+        Invalid username or password
+    </div>
+
 </form>
-<a href="/signup">Don't have an account?</a>
+
+<a th:href="@{/signup}">Don't have an account?</a>
+
+</body>
+</html>
