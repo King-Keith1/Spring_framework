@@ -1,6 +1,6 @@
 package tut5.domain;
 
-import guru.springframework.sfgrestbrewery.web.model.BeerStyleEnum;
+import tut5.web.model.BeerStyleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,7 +28,7 @@ public class Beer {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Type(type="org.hibernate.type.UUIDCharType")
+    @Type(type = "org.hibernate.type.UUIDCharType")
     @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
     private UUID id;
 
@@ -36,7 +36,10 @@ public class Beer {
     private Long version;
 
     private String beerName;
+
+    @Enumerated(EnumType.STRING)
     private BeerStyleEnum beerStyle;
+
     private String upc;
 
     private Integer quantityOnHand;
