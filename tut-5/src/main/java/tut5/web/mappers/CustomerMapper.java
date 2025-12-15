@@ -11,9 +11,8 @@ import tut5.web.model.CustomerDto;
 @Mapper
 public interface CustomerMapper {
 
+    // Only ignore 'id' because DB generates it
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdDate", ignore = true)
-    @Mapping(target = "lastModifiedDate", ignore = true)
     Customer customerDtoToCustomer(CustomerDto dto);
 
     CustomerDto customerToCustomerDto(Customer customer);

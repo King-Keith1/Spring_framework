@@ -5,22 +5,15 @@ import org.mapstruct.Mapping;
 import tut5.domain.Beer;
 import tut5.web.model.BeerDto;
 
-/**
- * Created by jt on 2019-05-25.
- */
 @Mapper(uses = {DateMapper.class})
 public interface BeerMapper {
 
-    @Mapping(target = "version", ignore = true)
-    @Mapping(target = "createdDate", ignore = true)
-    @Mapping(target = "lastModifiedDate", ignore = true)
+    // Mapping from Entity to DTO — no need to ignore extra entity fields
     BeerDto beerToBeerDto(Beer beer);
 
-    @Mapping(target = "version", ignore = true)
-    @Mapping(target = "createdDate", ignore = true)
-    @Mapping(target = "lastModifiedDate", ignore = true)
     BeerDto beerToBeerDtoWithInventory(Beer beer);
 
+    // Mapping from DTO to Entity — ignore fields managed by DB
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "version", ignore = true)
     @Mapping(target = "createdDate", ignore = true)
