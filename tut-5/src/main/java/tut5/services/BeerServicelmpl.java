@@ -1,12 +1,12 @@
 package tut5.services;
 
-import guru.springframework.sfgrestbrewery.domain.Beer;
-import guru.springframework.sfgrestbrewery.repositories.BeerRepository;
-import guru.springframework.sfgrestbrewery.web.controller.NotFoundException;
-import guru.springframework.sfgrestbrewery.web.mappers.BeerMapper;
-import guru.springframework.sfgrestbrewery.web.model.BeerDto;
-import guru.springframework.sfgrestbrewery.web.model.BeerPagedList;
-import guru.springframework.sfgrestbrewery.web.model.BeerStyleEnum;
+import tut5.domain.Beer;
+import tut5.repositories.BeerRepository;
+import tut5.web.controller.NotFoundException;
+import tut5.web.mappers.BeerMapper;
+import tut5.web.model.BeerDto;
+import tut5.web.model.BeerPagedList;
+import tut5.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;

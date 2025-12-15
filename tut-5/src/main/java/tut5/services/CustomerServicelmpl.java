@@ -1,6 +1,6 @@
 package tut5.services;
 
-import guru.springframework.sfgrestbrewery.web.model.CustomerDto;
+import tut5.web.model.CustomerDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
 package tut5.web.mappers;
 
-import guru.springframework.sfgrestbrewery.domain.Beer;
-import guru.springframework.sfgrestbrewery.web.model.BeerDto;
+import tut5.domain.Beer;
+import tut5.web.model.BeerDto;
 import org.mapstruct.Mapper;
 
 /**

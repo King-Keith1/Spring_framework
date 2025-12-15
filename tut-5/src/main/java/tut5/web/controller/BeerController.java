@@ -1,9 +1,9 @@
 package tut5.web.controller;
 
-import guru.springframework.sfgrestbrewery.services.BeerService;
-import guru.springframework.sfgrestbrewery.web.model.BeerDto;
-import guru.springframework.sfgrestbrewery.web.model.BeerPagedList;
-import guru.springframework.sfgrestbrewery.web.model.BeerStyleEnum;
+import tut5.services.BeerService;
+import tut5.web.model.BeerDto;
+import tut5.web.model.BeerPagedList;
+import tut5.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,7 @@
 package tut5.web.controller;
 
-import guru.springframework.sfgrestbrewery.services.CustomerService;
-import guru.springframework.sfgrestbrewery.web.model.CustomerDto;
+import tut5.services.CustomerService;
+import tut5.web.model.CustomerDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

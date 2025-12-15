@@ -1,7 +1,7 @@
 package tut5.web.mappers;
 
-import guru.springframework.sfgrestbrewery.domain.Customer;
-import guru.springframework.sfgrestbrewery.web.model.CustomerDto;
+import tut5.domain.Customer;
+import tut5.web.model.CustomerDto;
 import org.mapstruct.Mapper;
 
 /**

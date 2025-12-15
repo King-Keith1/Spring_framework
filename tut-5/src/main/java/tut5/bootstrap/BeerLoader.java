@@ -1,8 +1,8 @@
 package tut5.bootstrap;
 
-import guru.springframework.sfgrestbrewery.domain.Beer;
-import guru.springframework.sfgrestbrewery.repositories.BeerRepository;
-import guru.springframework.sfgrestbrewery.web.model.BeerStyleEnum;
+import tut5.domain.Beer;
+import tut5.repositories.BeerRepository;
+import tut5.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
