@@ -1,11 +1,11 @@
 package eldenmessages.controller;
 
-import eldenmessages.repository.MessageRepository;
+import eldenmessages.repository.MessageRepository; // Repository interface for accessing Message entities
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired; // Enables dependency injection of beans
+import org.springframework.stereotype.Controller;            // Marks this class as a Spring MVC controller
+import org.springframework.ui.Model;                       // Holds attributes for rendering views
+import org.springframework.web.bind.annotation.GetMapping; // Maps HTTP GET requests to handler methods
 
 
 @Controller

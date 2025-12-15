@@ -1,7 +1,8 @@
 package eldenmessages.entity;
 
-import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.persistence.*;      // JPA annotations for ORM mapping (e.g., @Entity, @Table, @Id, @GeneratedValue)
+import lombok.Data;               // Lombok annotation to auto-generate getters, setters, equals, hashCode, and toString
+
 
 @Data
 @Entity

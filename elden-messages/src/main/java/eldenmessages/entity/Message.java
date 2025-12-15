@@ -1,7 +1,10 @@
 package eldenmessages.entity;
 
+// JPA annotations for mapping this class to a database table
 import jakarta.persistence.*;
+// Lombok annotation to auto-generate getters, setters, equals, hashCode, and toString
 import lombok.Data;
+// Java date-time API for storing the message creation timestamp
 import java.time.LocalDateTime;
 
 @Data

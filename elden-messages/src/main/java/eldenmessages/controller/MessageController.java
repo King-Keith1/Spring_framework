@@ -1,16 +1,20 @@
 package eldenmessages.controller;
 
-import eldenmessages.entity.Message;
-import eldenmessages.repository.MessageRepository;
+// Domain/entity and repository imports
+import eldenmessages.entity.Message;              // Represents the message entity persisted in the database
+import eldenmessages.repository.MessageRepository; // Repository interface for CRUD operations on Message
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+// Spring framework imports
+import org.springframework.beans.factory.annotation.Autowired; // Enables dependency injection of beans
+import org.springframework.stereotype.Controller;               // Marks this class as a Spring MVC controller
+import org.springframework.ui.Model;                           // Holds attributes for rendering views
+import org.springframework.web.bind.annotation.GetMapping;     // Maps HTTP GET requests to handler methods
+import org.springframework.web.bind.annotation.ModelAttribute; // Binds form fields to method parameters/objects
+import org.springframework.web.bind.annotation.PostMapping;    // Maps HTTP POST requests to handler methods
 
-import java.security.Principal;
+// Java standard library imports
+import java.security.Principal; // Represents the currently authenticated user
+
 
 
 @Controller
