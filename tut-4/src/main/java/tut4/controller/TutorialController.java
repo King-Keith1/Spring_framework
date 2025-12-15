@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bezkoder.spring.jpa.postgresql.model.Tutorial;
-import com.bezkoder.spring.jpa.postgresql.repository.TutorialRepository;
+import tut4.model.Tutorial;
+import tut4.repository.TutorialRepository;
 
 // REST controller for handling tutorial-related API requests
 @CrossOrigin(origins = "http://localhost:8081") // Allow frontend from port 8081 to access this API
