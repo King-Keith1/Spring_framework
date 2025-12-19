@@ -11,7 +11,8 @@ public class Tutorial {
     @Schema(description = "Title of the tutorial", example = "Spring Boot + Swagger")
     private String title;
 
-    @Schema(description = "Description of the tutorial", example = "How to integrate Swagger with Spring Boot")
+    @Schema(description = "Description of the tutorial",
+            example = "How to integrate Swagger with Spring Boot")
     private String description;
 
     @Schema(description = "Published flag", example = "true")
@@ -26,7 +27,7 @@ public class Tutorial {
         this.published = published;
     }
 
-    // getters & setters
+    // Getters & setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

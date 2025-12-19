@@ -10,4 +10,4 @@ public class TutApiApplication {
         SpringApplication.run(TutApiApplication.class, args);
     }
 
-}
+} 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class PizzaController {
 
     public String getPizza(){
-        return "Hot Pizza!";
+        return "I learnt how to do spring annotations from; https://www.udemy.com/course/spring-and-spring-boot-annotations/";
     }
 
 }

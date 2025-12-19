@@ -11,24 +11,35 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 
-@Configuration
+@Configuration // Marks this as a Spring config class
 public class OpenAPIConfig {
 
+    // URLs loaded from application.properties
     @Value("${app.openapi.dev-url}")
     private String devUrl;
 
     @Value("${app.openapi.prod-url}")
     private String prodUrl;
 
-    @Bean
+    @Bean // Exposes OpenAPI config as a Spring Bean
     public OpenAPI customOpenAPI() {
+
+        // Server definitions shown in Swagger UI
         Server devServer = new Server().url(devUrl).description("Development server");
         Server prodServer = new Server().url(prodUrl).description("Production server");
 
-        Contact contact = new Contact().name("Your Name").email("you@example.com").url("https://your-site");
+        // API contact details
+        Contact contact = new Contact()
+                .name("Your Name")
+                .email("you@example.com")
+                .url("https://your-site");
 
-        License mit = new License().name("MIT License").url("https://choosealicense.com/licenses/mit/");
+        // API license info
+        License mit = new License()
+                .name("MIT License")
+                .url("https://choosealicense.com/licenses/mit/");
 
+        // General API metadata
         Info info = new Info()
                 .title("Tutorial Management API")
                 .version("1.0")
@@ -36,6 +47,9 @@ public class OpenAPIConfig {
                 .contact(contact)
                 .license(mit);
 
-        return new OpenAPI().info(info).servers(List.of(devServer, prodServer));
+        // Final OpenAPI object
+        return new OpenAPI()
+                .info(info)
+                .servers(List.of(devServer, prodServer));
     }
 }
